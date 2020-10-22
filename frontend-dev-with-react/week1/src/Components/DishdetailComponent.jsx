@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
 
-function renderDish({ dish }) {
+function renderDish(dish) {
   if (dish != null)
     return (
       <Card>
@@ -15,7 +15,7 @@ function renderDish({ dish }) {
   else return <div></div>;
 }
 
-function renderComments({ comments }) {
+function renderComments(comments) {
   if (comments.length) {
     const comment = comments.map((comment) => (
       <div className="list-unstyled">
