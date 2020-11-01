@@ -33,7 +33,7 @@ function RenderDish({ dish }) {
   else return <div></div>;
 }
 
-function RenderComments({ comments }) {
+function RenderComments({ comments, addComment, dishId }) {
   if (comments.length) {
     const comment = comments.map((comment) => (
       <div className="list-unstyled">
@@ -51,7 +51,7 @@ function RenderComments({ comments }) {
     return (
       <div>
         {comment}
-        <CommentForm />
+        <CommentForm dishId={dishId} addComment={addComment} />
       </div>
     );
   } else return <div></div>;
@@ -76,6 +76,12 @@ class CommentForm extends Component {
     this.openCommentModalFunc();
     console.log("Current State is: " + JSON.stringify(values));
     alert("Current State is: " + JSON.stringify(values));
+    this.props.addComment(
+      this.props.dishId,
+      values.rating,
+      values.author,
+      values.comment
+    );
     // event.preventDefault();
   }
 
@@ -131,8 +137,8 @@ class CommentForm extends Component {
                 <Label xs={12}>
                   Your Name
                   <Control.text
-                    model=".name"
-                    id="name"
+                    model=".author"
+                    id="author"
                     name="name"
                     placeholder="Your Name"
                     className="form-control"
@@ -209,7 +215,11 @@ const DishDetail = (props) => {
           <RenderDish dish={props.dish} />
         </div>
         <div className="col-12 col-md-5 m-1">
-          <RenderComments comments={props.comments} />
+          <RenderComments
+            comments={props.comments}
+            addComment={props.addComment}
+            dishId={props.dish.id}
+          />
         </div>
       </div>
     </div>
