@@ -12,6 +12,8 @@ import {
   Row,
   Label,
   Col,
+  ModalHeader,
+  ModalBody,
 } from "reactstrap";
 import "font-awesome/css/font-awesome.css";
 import { Link } from "react-router-dom";
@@ -63,6 +65,7 @@ class CommentForm extends Component {
     };
 
     this.openCommentModalFunc = this.openCommentModalFunc.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   openCommentModalFunc = () => {
@@ -70,6 +73,7 @@ class CommentForm extends Component {
   };
 
   handleSubmit(values) {
+    this.openCommentModalFunc();
     console.log("Current State is: " + JSON.stringify(values));
     alert("Current State is: " + JSON.stringify(values));
     // event.preventDefault();
@@ -82,17 +86,20 @@ class CommentForm extends Component {
     return (
       <>
         <Button outline color="secondary" onClick={this.openCommentModalFunc}>
-          <i className="fa fa-home fa-lg"></i>Submit Comment
+          <i className="fa fa-edit fa-lg"></i>Submit Comment
         </Button>
         <Modal
           isOpen={this.state.openCommentModal}
           centered
-          onClosed={this.openCommentModal}
+          toggle={this.openCommentModalFunc}
         >
-          <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
-            <Row className="form-group p-2">
-              <Col>
-                <Label>
+          <ModalHeader toggle={this.openCommentModalFunc}>
+            Submit Comments
+          </ModalHeader>
+          <ModalBody>
+            <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+              <Row className="form-group">
+                <Label md={12}>
                   Rating
                   <Control.select
                     model=".rating"
@@ -104,9 +111,11 @@ class CommentForm extends Component {
                       required,
                     }}
                   >
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
                   </Control.select>
                   <Errors
                     className="text-danger"
@@ -117,12 +126,10 @@ class CommentForm extends Component {
                     }}
                   />
                 </Label>
-              </Col>
-            </Row>
-            <Row className="form-group">
-              <Label md={2}>
-                Your Name
-                <Col>
+              </Row>
+              <Row className="form-group">
+                <Label xs={12}>
+                  Your Name
                   <Control.text
                     model=".name"
                     id="name"
@@ -145,38 +152,37 @@ class CommentForm extends Component {
                       maxLength: "Must be 15 characters or less",
                     }}
                   />
-                </Col>
-              </Label>
-            </Row>
-            <Row className="form-group">
-              <Label md={2}>
-                Comment
-                <Col md={10}>
+                </Label>
+              </Row>
+              <Row className="form-group">
+                <Label xs={12}>
+                  Comment
                   <Control.textarea
-                    model=".rating"
-                    id="rating"
-                    name="rating"
-                    placeholder="First Name"
+                    model=".comment"
+                    id="comment"
+                    name="comment"
+                    rows={6}
+                    placeholder="Comment"
                     className="form-control"
                     validators={{
                       required,
-                      minLength: minLength(3),
                     }}
                   />
                   <Errors
                     className="text-danger"
-                    model=".rating"
+                    model=".comment"
                     show="touched"
                     messages={{
                       required: "Required",
-                      minLength: "Must be greater than 2 characters",
-                      maxLength: "Must be 15 characters or less",
                     }}
                   />
-                </Col>
-              </Label>
-            </Row>
-          </LocalForm>
+                </Label>
+              </Row>
+              <Button type="submit" color="primary">
+                Submit
+              </Button>
+            </LocalForm>
+          </ModalBody>
         </Modal>
       </>
     );
