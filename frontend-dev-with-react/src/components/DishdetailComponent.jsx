@@ -18,7 +18,7 @@ import {
 import { Loading } from "./LoadingComponent";
 import "font-awesome/css/font-awesome.css";
 import { Link } from "react-router-dom";
-import { Control, LocalForm, Errors } from "react-redux-form";
+import { Control, Form, Errors, actions, LocalForm } from "react-redux-form";
 
 function RenderDish({ dish }) {
   if (dish != null)
