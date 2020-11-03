@@ -6,18 +6,15 @@ import Footer from "./FooterComponent";
 import Home from "./HomeComponent";
 import Contact from "./ContactComponent";
 import About from "./AboutComponent";
-import { DISHES } from "../shared/dishes";
-import { COMMENTS } from "../shared/comments";
-import { PROMOTIONS } from "../shared/promotions";
-import { LEADERS } from "../shared/leaders";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { actions } from "react-redux-form";
 import {
-  addComment,
+  postComment,
   fetchDishes,
   fetchComments,
   fetchPromos,
+  addComment,
 } from "../redux/ActionCreators";
 
 const mapStateToProps = (state) => {
@@ -40,18 +37,13 @@ const mapDispatchToProps = (dispatch) => ({
   },
   fetchComments: () => dispatch(fetchComments()),
   fetchPromos: () => dispatch(fetchPromos()),
+  postComment: (dishId, rating, author, comment) =>
+    dispatch(postComment(dishId, rating, author, comment)),
 });
 
 class Main extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      dishes: DISHES,
-      comments: COMMENTS,
-      promotions: PROMOTIONS,
-      leaders: LEADERS,
-    };
   }
 
   componentDidMount() {
@@ -79,6 +71,7 @@ class Main extends Component {
           promoLoading={this.props.promotions.isLoading}
           promoErrMess={this.props.promotions.errMess}
           leader={this.props.leaders.filter((leader) => leader.featured)[0]}
+          postComment={this.props.postComment}
         />
       );
     };
@@ -97,7 +90,7 @@ class Main extends Component {
             (comment) => comment.dishId === parseInt(match.params.dishId, 10)
           )}
           commentsErrMess={this.props.comments.errMess}
-          addComment={this.props.addComment}
+          postComment={this.props.postComment}
         />
       );
     };

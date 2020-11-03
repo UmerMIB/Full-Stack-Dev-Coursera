@@ -35,12 +35,11 @@ function RenderDish({ dish }) {
   else return <div></div>;
 }
 
-function RenderComments({ comments, addComment, dishId }) {
+function RenderComments({ comments, postComment, dishId }) {
   if (comments.length) {
     const comment = comments.map((comment) => (
       <div className="list-unstyled">
         <li style={{ fontSize: "1rem" }}>{comment.comment}</li>
-        <br />
         <li style={{ fontSize: "1rem" }}>{`-- ${
           comment.author
         }, ${new Intl.DateTimeFormat("en-US", {
@@ -48,12 +47,13 @@ function RenderComments({ comments, addComment, dishId }) {
           month: "short",
           day: "2-digit",
         }).format(new Date(Date.parse(comment.date)))}`}</li>
+        <br />
       </div>
     ));
     return (
       <div>
         {comment}
-        <CommentForm dishId={dishId} addComment={addComment} />
+        <CommentForm dishId={dishId} postComment={postComment} />
       </div>
     );
   } else return <div></div>;
@@ -78,7 +78,7 @@ class CommentForm extends Component {
     this.openCommentModalFunc();
     console.log("Current State is: " + JSON.stringify(values));
     alert("Current State is: " + JSON.stringify(values));
-    this.props.addComment(
+    this.props.postComment(
       this.props.dishId,
       values.rating,
       values.author,
@@ -236,7 +236,7 @@ const DishDetail = (props) => {
           <div className="col-12 col-md-5 m-1">
             <RenderComments
               comments={props.comments}
-              addComment={props.addComment}
+              postComment={props.postComment}
               dishId={props.dish.id}
             />
           </div>
