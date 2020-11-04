@@ -15,6 +15,7 @@ import {
   fetchComments,
   fetchPromos,
   addComment,
+  fetchLeaders,
 } from "../redux/ActionCreators";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
@@ -30,9 +31,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   addComment: (dishId, rating, author, comment) =>
     dispatch(addComment(dishId, rating, author, comment)),
-  fetchDishes: () => {
-    dispatch(fetchDishes());
-  },
+  fetchDishes: () => dispatch(fetchDishes()),
   resetFeedbackForm: () => {
     dispatch(actions.reset("feedback"));
   },
@@ -40,17 +39,15 @@ const mapDispatchToProps = (dispatch) => ({
   fetchPromos: () => dispatch(fetchPromos()),
   postComment: (dishId, rating, author, comment) =>
     dispatch(postComment(dishId, rating, author, comment)),
+  fetchLeaders: () => dispatch(fetchLeaders()),
 });
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.fetchDishes();
     this.props.fetchComments();
     this.props.fetchPromos();
+    this.props.fetchLeaders();
   }
 
   onDishSelect(dishId) {
@@ -71,7 +68,11 @@ class Main extends Component {
           }
           promoLoading={this.props.promotions.isLoading}
           promoErrMess={this.props.promotions.errMess}
-          leader={this.props.leaders.filter((leader) => leader.featured)[0]}
+          leader={
+            this.props.leaders.leaders.filter((leader) => leader.featured)[0]
+          }
+          leaderLoading={this.props.leaders.isLoading}
+          leaderErrMess={this.props.leaders.errMess}
           postComment={this.props.postComment}
         />
       );
@@ -96,6 +97,16 @@ class Main extends Component {
       );
     };
 
+    const AboutPage = () => {
+      return (
+        <About
+          leaders={this.props.leaders.leaders}
+          leaderLoading={this.props.leaders.isLoading}
+          leaderErrMess={this.props.leaders.errMess}
+        />
+      );
+    };
+
     return (
       <div>
         <Header />
@@ -108,11 +119,7 @@ class Main extends Component {
             >
               <Switch>
                 <Route path="/home" component={HomePage} />
-                <Route
-                  exact
-                  path="/aboutus"
-                  component={() => <About leaders={this.props.leaders} />}
-                />
+                <Route exact path="/aboutus" component={AboutPage} />
                 <Route
                   exact
                   path="/menu"

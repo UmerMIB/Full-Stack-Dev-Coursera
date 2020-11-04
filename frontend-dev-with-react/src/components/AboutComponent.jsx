@@ -7,6 +7,7 @@ import {
   CardHeader,
   Media,
 } from "reactstrap";
+import { Loading } from "./LoadingComponent";
 import { Link } from "react-router-dom";
 
 function RenderLeader({ leader }) {
@@ -30,14 +31,25 @@ function RenderLeader({ leader }) {
   );
 }
 
-function About(props) {
-  const leaders = props.leaders.map((leader) => {
+const Leaders = ({ leaderLoading, leaderErrMess, leaders }) => {
+  if (leaderLoading) {
+    return <Loading />;
+  } else if (leaderErrMess) {
+    return <h4>{leaderErrMess}</h4>;
+  } else
     return (
-      <p>
-        <RenderLeader leader={leader} />
-      </p>
+      <Media list>
+        {leaders.map((leader) => {
+          return (
+            <p>
+              <RenderLeader leader={leader} />
+            </p>
+          );
+        })}
+      </Media>
     );
-  });
+};
+function About({ leaderLoading, leaderErrMess, leaders }) {
   return (
     <div className="container">
       <div className="row">
@@ -114,7 +126,11 @@ function About(props) {
           <h2>Corporate Leadership</h2>
         </div>
         <div className="col-12">
-          <Media list>{leaders}</Media>
+          <Leaders
+            leaderLoading={leaderLoading}
+            leaderErrMess={leaderErrMess}
+            leaders={leaders}
+          />
         </div>
       </div>
     </div>
