@@ -9,13 +9,15 @@ import {
 } from "reactstrap";
 import { Loading } from "./LoadingComponent";
 import { Link } from "react-router-dom";
+import { Fade, Stagger } from "react-animation-components";
+import { baseUrl } from "./../shared/baseUrl";
 
 function RenderLeader({ leader }) {
   return (
     <>
       <Media key={leader.id} className="mb-4">
         <Media left className="mr-4">
-          <Media object src={leader.image} alt="leader image" />
+          <Media object src={baseUrl + leader.image} alt="leader image" />
         </Media>
         <Media body className="col-10">
           <Media heading>{leader.name}</Media>
@@ -39,13 +41,17 @@ const Leaders = ({ leaderLoading, leaderErrMess, leaders }) => {
   } else
     return (
       <Media list>
-        {leaders.map((leader) => {
-          return (
-            <p>
-              <RenderLeader leader={leader} />
-            </p>
-          );
-        })}
+        <Stagger in>
+          {leaders.map((leader) => {
+            return (
+              <Fade in>
+                <p>
+                  <RenderLeader leader={leader} />
+                </p>
+              </Fade>
+            );
+          })}
+        </Stagger>
       </Media>
     );
 };
