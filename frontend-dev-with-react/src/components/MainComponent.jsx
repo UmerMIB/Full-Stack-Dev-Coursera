@@ -16,6 +16,7 @@ import {
   fetchPromos,
   addComment,
   fetchLeaders,
+  postFeedback,
 } from "../redux/ActionCreators";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
@@ -40,6 +41,7 @@ const mapDispatchToProps = (dispatch) => ({
   postComment: (dishId, rating, author, comment) =>
     dispatch(postComment(dishId, rating, author, comment)),
   fetchLeaders: () => dispatch(fetchLeaders()),
+  postFeedback: (feedback) => dispatch(postFeedback(feedback)),
 });
 
 class Main extends Component {
@@ -107,6 +109,15 @@ class Main extends Component {
       );
     };
 
+    const ContactPage = () => {
+      return (
+        <Contact
+          resetFeedbackForm={this.props.resetFeedbackForm}
+          postFeedback={this.props.postFeedback}
+        />
+      );
+    };
+
     return (
       <div>
         <Header />
@@ -126,13 +137,7 @@ class Main extends Component {
                   component={() => <Menu dishes={this.props.dishes} />}
                 />
                 <Route path="/menu/:dishId" component={DishWithId} />
-                <Route
-                  exact
-                  path="/contactus"
-                  component={() => (
-                    <Contact resetFeedbackForm={this.props.resetFeedbackForm} />
-                  )}
-                />
+                <Route exact path="/contactus" component={ContactPage} />
                 <Redirect to="/home" />
               </Switch>
             </CSSTransition>

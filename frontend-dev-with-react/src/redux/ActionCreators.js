@@ -1,6 +1,5 @@
 import * as ActionTypes from "./ActionTypes";
 import { baseUrl } from "../shared/baseUrl";
-import { actionTypes } from "react-redux-form";
 
 export const fetchDishes = () => (dispatch) => {
   dispatch(dishesLoading(true));
@@ -154,6 +153,39 @@ export const postComment = (dishId, rating, author, comment) => (dispatch) => {
     .catch((error) => {
       console.log("post comments", error.message);
       alert("Your comment could not be posted\nError: " + error.message);
+    });
+};
+
+export const postFeedback = (feedback) => () => {
+  return fetch(baseUrl + "feedback", {
+    method: "POST",
+    body: JSON.stringify(feedback),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "same-origin",
+  })
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            "Error " + response.status + ": " + response.statusText
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      (error) => {
+        throw error;
+      }
+    )
+    .then((response) => response.json())
+    .then((response) => alert("your feedback has been recorded"))
+    .catch((error) => {
+      console.log("post feedback", error.message);
+      alert("Your feedback could not be posted\nError: " + error.message);
     });
 };
 
