@@ -35,6 +35,9 @@
             </div>
         </div>
     </nav>
+
+
+
     <header class="jumbotron">
         <div class="container">
             <div class="row row-header">
@@ -43,8 +46,13 @@
                     <p>We take inspiration from the World's best cuisines, and create a unique fusion experience. Our
                         lipsmacking creations will tickle your culinary senses!</p>
                 </div>
-                <div class="col col-sm align-self-center">
+                <div class="col col-sm align-self-center justify-content-around">
                     <img src="img/logo.png" class="img-fluid">
+                </div>
+                <div class="col-12 col-sm align-self-center">
+                    <a type="button" href='./index.html#reservationForm' class="btn btn-warning btn-block btn-sm">
+                        Reserve Table
+                    </a>
                 </div>
             </div>
         </div>
@@ -76,17 +84,16 @@
             </div>
             <div class="col col-sm col-md">
                 <div class="media">
-                    <img class="d-flex mr-3 img-thumbnail align-self-center" src="img/alberto.png"
-                        alt="Alberto Somayya">
                     <div class="media-body">
-                        <h2 class="mt-0">Alberto Somayya</h2>
-                        <h4>Executive Chef</h4>
-                        <p class="d-none d-sm-block">Award winning three-star Michelin chef with wide
-                            International experience having worked closely with
-                            whos-who in the culinary world, he specializes in
-                            creating mouthwatering Indo-Italian fusion experiences.
-                        </p>
+                        <h2 class="mt-0">Weekend Grand Buffet <span class="badge badge-danger">New </span></h2>
+                        <p class="d-none d-sm-block">Featuring mouthwatering combinations with a choice of five
+                            different salads, six enticing
+                            appetizers,
+                            six main entrees and five choicest desserts. Free flowing bubbly and soft drinks. All for
+                            just
+                            $19.99 per person </p>
                     </div>
+                    <img class="d-flex ml-3 img-thumbnail align-self-center" src="img/buffet.png" alt="Buffet">
                 </div>
             </div>
         </div>
@@ -96,16 +103,23 @@
                 <h3>Meet our Culinary Specialists</h3>
             </div>
             <div class="col col-sm order-sm-first col-md">
-                <h2>Alberto Somayya</h2>
-                <h4>Executive Chef</h4>
-                <p>Award winning three-star Michelin chef with wide International experience having worked closely with
-                    whos-who in the culinary world, he specializes in creating mouthwatering Indo-Italian fusion
-                    experiences. </p>
+                <div class="media">
+                    <img class="d-flex mr-3 img-thumbnail align-self-center" src="img/alberto.png" alt="Alberto">
+                    <div class="media-body">
+                        <h2 class="mt-0">Alberto Somayya</h2>
+                        <h4>Executive Chef</h4>
+                        <p class="d-none d-sm-block">Award winning three-star Michelin chef with wide International
+                            experience having worked
+                            closely with
+                            whos-who in the culinary world, he specializes in creating mouthwatering Indo-Italian fusion
+                            experiences. </p>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="row row-content align-items-center">
-            <div class="card mb-5 col-12 col-sm-8">
+        <div class="row row-content align-items-center" id="reservationForm">
+            <div class="card mb-5 col-12 col-sm-8 p-0">
                 <div class="card-header bg-warning text-white">
                     <h2> Reserve A Table </h2>
                 </div>
@@ -147,12 +161,12 @@
                                     <input type="date" id="guest1" name="guest" placeholder="Date">
                                     <input type="time" id="guest2" name="guest" placeholder="Time">
                                 </div>
-    
+
                             </div>
                         </div>
                         <div class="form-group row ">
-                            <div class="col-md-10 offset-2">
-                                <a class="btn btn-primary">Reserve</a>
+                            <div class="col-md-10 offset-2 pl-0">
+                                <button type="submit" class="btn btn-primary">Reserve</button>
                             </div>
                         </div>
                     </form>
@@ -160,6 +174,9 @@
             </div>
         </div>
     </div>
+   
+
+
 
     <footer class="footer">
         <div class='container'>
@@ -212,5 +229,6 @@
     <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
+
 
 </html>
