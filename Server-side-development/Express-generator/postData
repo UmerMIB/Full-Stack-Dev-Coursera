@@ -1,0 +1,14 @@
+{
+	"name": "umer",
+	"description": "dish1 is here",
+	"image":"image",
+	"category":"category",
+	"label":"label",
+	"price":55,
+	"featured":true,
+	"comment":{
+	"rating":3,
+	"comment":"comments",
+	"author":"author"	
+	}
+}

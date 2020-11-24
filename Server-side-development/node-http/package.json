@@ -1,0 +1,11 @@
+{
+    "name": "node-http",
+    "version": "1.0.0",
+    "description": "Node-HTTP module examples",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "author": " Young Umer MiB ",
+    "license": "ISC"
+}
