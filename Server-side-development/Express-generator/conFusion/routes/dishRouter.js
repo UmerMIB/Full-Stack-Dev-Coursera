@@ -175,7 +175,7 @@ dishRouter
     Dishes.findById(req.params.dishId)
       .then(
         (dish) => {
-          if (dish != null && dish.comment.id(req.params.commentsId) != null) {
+          if (dish && dish.comment.id(req.params.commentsId)) {
             res.statusCode = 200;
             res.setHeader("Content-Type", "application/json");
             res.json(dish.comment.id(req.params.commentsId));
