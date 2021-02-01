@@ -76,7 +76,7 @@ dishRouter
     Dishes.findByIdAndUpdate(
       req.params.dishId,
       {
-        $set: true,
+        $set: req.body,
       },
       { new: true }
     )
