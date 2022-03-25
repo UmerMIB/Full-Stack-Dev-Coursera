@@ -16,7 +16,7 @@
     "usemin": "usemin contactus.html -d dist --htmlmin -o dist/contactus.html && usemin aboutus.html -d dist --htmlmin -o dist/aboutus.html && usemin index.html -d dist --htmlmin -o dist/index.html",
     "build": "npm run clean && npm run imagemin && npm run copyfonts && npm run usemin"
   },
-  "author": "",
+  "author": "UmerMiB",
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.23.6",
